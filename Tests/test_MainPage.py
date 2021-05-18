@@ -30,10 +30,12 @@ class Test_LoginPages(BaseTest):
     #     assets_count=self.driver.find_element(By.XPATH,"/html/body/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div/div/a/label")
     #     assets_count_text=assets_count.text()
     #     assert assets_count_text == self.sec_page.ASSETS_CHECKBOX_COPY_ITEMSNUMBER
-    def test_create_first_gallery_video_academy(self):
+    # def test_create_first_gallery_video_academy(self):
+    #     self.mainPage = LoginPages(self.driver)
+    #     self.mainPage.create_first_gallery_video_academy(self.mainPage.ADD_FILES_FROM_ASSETS_TITLE)
+    def test_create_gallery_main_link(self):
         self.mainPage = LoginPages(self.driver)
-        self.mainPage.create_first_gallery_video_academy(self.mainPage.ADD_FILES_FROM_ASSETS_TITLE)
-
+        self.mainPage.create_gallery_main_link(self.mainPage.ADD_FILES_FROM_ASSETS_TITLE)
 
 
 
