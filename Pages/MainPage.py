@@ -14,6 +14,9 @@ class LoginPages(BasePage):
     ADD_FILES_FROM_ASSETS_TITLE = "sample4.wma"
     ADD_FILES_FROM_ASSETS_CHECKBOX1 = (By.XPATH, "/html/body/div[1]/div[2]/div[4]/div[2]/div[3]/div/div[15]/div[1]/div[1]/label/i")
     ADD_FILES_FROM_ASSETS_CHECKBOX2 = (By.XPATH,"/html/body/div[1]/div[2]/div[4]/div[2]/div[3]/div/div[15]/div[2]/div[1]/label/i")
+    ADD_FILES_FROM_ASSETS_FINISH = (By.XPATH,"/html/body/div[1]/div[2]/div[4]/div[2]/div[2]/div[3]/button[2]")
+    FIRST_GALLERY_TITLE_HOVER = (By.XPATH,"/html/body/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/span/span[2]")
+    FIRST_GALLERY_TITLE_TEXT = (By.XPATH,"/html/body/div[1]/div[2]/div[3]/table/tbody/tr[1]/td[2]/div[1]/form/input")
     def __init__(self,driver):
         super().__init__(driver)
         self.driver.get(TestData.BASE_URL)
@@ -32,6 +35,7 @@ class LoginPages(BasePage):
         self.mainPage.do_click(GalleriesPage.CREATE_YOUR_FIRST_GALLERY_LINK)
         self.mainPage.do_hover(GalleriesPage.VIDEO_ACADEMY_TEMPLATE_HOVER)
         self.mainPage.do_click(GalleriesPage.VAT_USE_THIS_GALLERY)
+        time.sleep(2)
         self.mainPage.do_click(GalleriesPage.CREATE_GALLERY_SAVE_AND_NEXT)
         self.mainPage.do_click(GalleriesPage.GALLERY_ITEMS_FOLDER_ADD_FILES_FROM_ASSETS)
         self.do_send_keys(GalleriesPage.GALLERY_ITEMS_FOLDER_AFFA_SEARCH_INPUT, title)
@@ -39,6 +43,15 @@ class LoginPages(BasePage):
         time.sleep(2)
         self.do_click(self.ADD_FILES_FROM_ASSETS_CHECKBOX1)
         self.do_click(self.ADD_FILES_FROM_ASSETS_CHECKBOX2)
+        self.do_click(self.ADD_FILES_FROM_ASSETS_FINISH)
+        self.mainPage.do_click(GalleriesPage.MAIN_GALLERY_LINK)
+        time.sleep(2)
+        self.do_hover(self.FIRST_GALLERY_TITLE_HOVER)
+        self.do_click(self.FIRST_GALLERY_TITLE_HOVER)
+        self.do_clear(self.FIRST_GALLERY_TITLE_TEXT)
+        self.do_send_keys(self.FIRST_GALLERY_TITLE_TEXT,"Test Gallery Title")
+
+
 
 
 
