@@ -20,3 +20,5 @@ class TestData:
 
     ADD_GALLERY_FROM_ASSETS_NAME1="sample4.wma"
     ADD_GALLERY_FROM_ASSETS_NAME2="file_example_MOV_640_800kB (1).mov"
+
+    ASSETS_NEW_ADDED_ASSET_TITLE = "New Added Asset"
