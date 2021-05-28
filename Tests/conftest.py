@@ -1,5 +1,6 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.support.select import Select
 from Config.config import TestData
 @pytest.fixture(params=['chrome'],scope='class')
 def init_driver(request):
