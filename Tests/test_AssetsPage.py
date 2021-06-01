@@ -28,7 +28,7 @@ class Test_Assets(BaseTest):
         if assets_copy_to_text == "Copy To("+str(assets_checkbox_length)+")":
             print("*************The Copy to number of items is the same as actual number of items*****************")
         else:
-            print("Something went wrong.")
+            print("Something went wrong with number of assets.")
     def test_upload_file_to_assets_folder(self):
         self.assets_page = AssetsPage(self.driver)
         self.assets_page.upload_file_to_assets_folder(self.assets_page.ASSETS_UPLOAD_FILE_PATH)
