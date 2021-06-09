@@ -42,6 +42,21 @@ class PhotonWizard(BasePage):
     SHOW_AFTER_FIRST_VIDEO_RADIO = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[4]/div[1]/div[1]/div[2]/div/div[2]/div/div[1]/div/ul/li[2]/label/b")
     LEAD_GEN_DONE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[4]/div[1]/div[1]/div[1]")
     SHOW_BEFORE_FIRST_VIDEO_RADIO = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[4]/div[1]/div[1]/div[2]/div/div[2]/div/div[1]/div/ul/li[3]/label/b")
+    VIDEO_PLAYER_SIZE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[1]/p/div/span")
+    VIDEO_PLAYER_SIZE_RADIO = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[1]/div[2]/div/div/div/div/ul/li[2]/label/b")
+    VIDEO_PLAYER_SIZE_WIDTH = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[1]/div[2]/div/div/div/div/ul/li[2]/label/input[2]")
+    VIDEO_PLAYER_SIZE_LENGTH = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[1]/div[2]/div/div/div/div/ul/li[2]/label/input[3]")
+    VIDEO_PLAYER_SIZE_DONE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[1]/div[1]")
+
+    PLAY_VIDEO_LOOP_MODE_TOGGLE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[3]/div[1]/div[3]/div[3]/label")
+    PLAY_VIDEO_LOOP_MODE_DONE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[3]/div[1]/div[3]/div[1]")
+
+    PASSWORD_PROTECTION_TOGGLE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[5]/div[1]/div[1]/div[3]/label/span")
+    PASSWORD_INPUT = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[5]/div[1]/div[1]/div[2]/div/div[1]/div/input")
+    PASSWORD_TEXT_INPUT = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[5]/div[1]/div[1]/div[2]/div/div[2]/div/textarea")
+    PASSWORD_PROTECTION_DONE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[5]/div[1]/div[1]/div[1]")
+    IFRAME_PASSWORD_INPUT =(By.XPATH, "/html/body/div/div/div/div/div/div/div[1]/div/div[1]/input")
+    IFRAME_PASSWORD_INPUT_CONTINUE = (By.XPATH,"/html/body/div/div/div/div/div/div/div[1]/div/div[2]/a")
 
 
 
@@ -57,6 +72,7 @@ class PhotonWizard(BasePage):
         self.do_hover(self.PHOTON_PLAYER_HOVER)
         time.sleep(2)
         self.do_click(self.PHOTON_PLAYER_CREATE_BUTTON)
+        time.sleep(3)
     def customize_save_galleries(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         time.sleep(2)
@@ -80,19 +96,23 @@ class PhotonWizard(BasePage):
         elem = self.driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[1]/div[1]/div[5]/p')
         elem.click()
         time.sleep(5)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
-        time.sleep(5)
-        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
-        time.sleep(5)
-        self.do_click(self.TEST_GALLERY)
+        iframe = self.driver.find_element(By.ID,"simulator_content")
+        self.driver.switch_to.frame(iframe)
         time.sleep(2)
-        new_page = self.driver.window_handles[1]
-        self.driver.switch_to.window(new_page)
-        time.sleep(2)
-    def disable_video_chapters(self):
-        new_page = self.driver.window_handles[0]
-        self.driver.switch_to.window(new_page)
+        # chapters_wrap = self.driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div/div/div[1]/div[2]/div[1]/div[1]/div/div[2]/div[9]")
+        # chapters_wrap_text = chapters_wrap.text
+        # print(chapters_wrap_text)
+        # self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
+        # time.sleep(5)
         # self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        # time.sleep(5)
+        # self.do_click(self.TEST_GALLERY)
+        # time.sleep(2)
+        # new_page = self.driver.window_handles[1]
+        # self.driver.switch_to.window(new_page)
+        # time.sleep(2)
+    def disable_video_chapters(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
         elem = self.driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[1]/div[1]/div[5]/div[3]')
         if elem.is_enabled():
@@ -100,20 +120,13 @@ class PhotonWizard(BasePage):
             time.sleep(2)
         else:
             pass
-        time.sleep(5)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
-        time.sleep(5)
-        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
-        time.sleep(5)
-        self.do_click(self.TEST_GALLERY)
         time.sleep(2)
-        # new_page = self.driver.window_handles[1]
-        # self.driver.switch_to.window(new_page)
-        # time.sleep(2)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(2)
+
     def video_popup(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
-        # new_page = self.driver.window_handles[0]
-        # self.driver.switch_to.window(new_page)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
         time.sleep(2)
         self.do_click(self.VIDEO_POPUP_ARROW_DOWN)
@@ -121,10 +134,9 @@ class PhotonWizard(BasePage):
         self.do_click(self.VIDEO_POPUP_OPTION_THUMBNAIL)
         time.sleep(2)
         self.do_click(self.VIDEO_POPUP_DONE)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
         time.sleep(2)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
-        time.sleep(2)
-        self.customize_save_galleries()
     def text_popup(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
@@ -135,9 +147,10 @@ class PhotonWizard(BasePage):
         time.sleep(2)
         self.do_click(self.VIDEO_POPUP_DONE)
         time.sleep(2)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
-        time.sleep(2)
-        self.customize_save_galleries()
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
+
     def video_autoplay(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
@@ -148,9 +161,10 @@ class PhotonWizard(BasePage):
         time.sleep(2)
         self.do_click(self.VIDEO_AUTOPLAY_DONE)
         time.sleep(2)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
-        time.sleep(2)
-        self.customize_save_galleries()
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
+
     def video_autoplay_with_sound(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
@@ -161,9 +175,9 @@ class PhotonWizard(BasePage):
         time.sleep(2)
         self.do_click(self.VIDEO_AUTOPLAY_DONE)
         time.sleep(2)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
-        time.sleep(2)
-        self.customize_save_galleries()
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
     def video_autoplay_scroll_view(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
@@ -177,6 +191,17 @@ class PhotonWizard(BasePage):
         self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
         time.sleep(2)
         self.customize_save_galleries()
+    def play_video_loop_mode(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
+        time.sleep(2)
+        self.do_click(self.PLAY_VIDEO_LOOP_MODE_TOGGLE)
+        time.sleep(2)
+        self.do_click(self.PLAY_VIDEO_LOOP_MODE_DONE)
+        time.sleep(2)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
     def lead_gen_after_first_video(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
@@ -190,14 +215,27 @@ class PhotonWizard(BasePage):
         pyautogui.click(486,851)
         self.do_click(self.LEAD_GEN_DONE)
         time.sleep(2)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
+        self.do_click(self.VIDEO_PLAYER_SIZE)
         time.sleep(2)
-        self.customize_save_galleries()
+        self.do_click(self.VIDEO_PLAYER_SIZE_RADIO)
+        time.sleep(2)
+        self.do_clear(self.VIDEO_PLAYER_SIZE_WIDTH)
+        time.sleep(1)
+        self.do_send_keys(self.VIDEO_PLAYER_SIZE_WIDTH,"1100")
+        time.sleep(2)
+        self.do_clear(self.VIDEO_PLAYER_SIZE_LENGTH)
+        self.do_send_keys(self.VIDEO_PLAYER_SIZE_LENGTH,"618")
+        time.sleep(2)
+        self.do_click(self.VIDEO_PLAYER_SIZE_DONE)
+        time.sleep(2)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
     def lead_gen_before_first_video(self):
         self.do_click(self.GALLERY_PAGE_MAIN_LINK)
         self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
         time.sleep(2)
-        self.do_click(self.LEAD_GEN_BTN_ARROW)
+        self.do_click(self.LEAD_GEN_TOGGLE_BUTTON)
         time.sleep(2)
         self.do_click(self.SHOW_BEFORE_FIRST_VIDEO_RADIO)
         time.sleep(3)
@@ -206,10 +244,33 @@ class PhotonWizard(BasePage):
         pyautogui.click(486,851)
         self.do_click(self.LEAD_GEN_DONE)
         time.sleep(2)
-        self.do_click(self.MAIN_SAVE_AND_NEXT_BUTTON)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
+    def password_protection(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
         time.sleep(2)
-        self.customize_save_galleries()
-        self.do_click(self.TEST_GALLERY)
+        pyautogui.click(486, 851)
+        time.sleep(2)
+        self.do_click(self.PASSWORD_PROTECTION_TOGGLE)
+        time.sleep(2)
+        self.do_clear(self.PASSWORD_INPUT)
+        time.sleep(2)
+        self.do_send_keys(self.PASSWORD_INPUT,"abcdefg")
+        time.sleep(2)
+        self.do_clear(self.PASSWORD_TEXT_INPUT)
+        time.sleep(2)
+        self.do_send_keys(self.PASSWORD_TEXT_INPUT,"higklmnop")
+        time.sleep(2)
+        self.do_click(self.PASSWORD_PROTECTION_DONE)
+        time.sleep(2)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
+
+
+
 
 
 
