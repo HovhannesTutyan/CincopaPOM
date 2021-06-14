@@ -58,6 +58,22 @@ class PhotonWizard(BasePage):
     IFRAME_PASSWORD_INPUT =(By.XPATH, "/html/body/div/div/div/div/div/div/div[1]/div/div[1]/input")
     IFRAME_PASSWORD_INPUT_CONTINUE = (By.XPATH,"/html/body/div/div/div/div/div/div/div[1]/div/div[2]/a")
 
+    ALLOW_DOWNLOADING_TOGGLE_BUTTON = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[5]/div[1]/div[2]/div[3]/label/span")
+
+    BRAND_PLAYER_TOGGLE_BUTTON = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[4]/div[3]/label/span")
+    REPLACE_LOGO_BUTTON = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[4]/div[2]/div/div[3]/div/div/div[2]/button")
+    CHOOSE_TO_UPLOAD_FILE = (By.XPATH,"/html/body/div[4]/div/div/div/div[2]/div/div/div/div/div[1]/button")
+    FILE_PATH = ("C:\\Users\\User\\Downloads\\alien_budgers.png")
+    BRAND_PLAYER_DONE = (By.XPATH,'/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[4]/div[1]')
+    PLAYER_CENTER = (By.CSS_SELECTOR, ".mejs-overlay-button")
+
+    VIDEO_WATERMARK_TOGGLE_BUTTON = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[5]/div[3]/label/span")
+    BOTTOM_RIGHT_RADIO = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[5]/div[2]/div/div[1]/div/div/ul/li[2]/label/i")
+    BOTTOM_LEFT_RADIO = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[5]/div[2]/div/div[1]/div/div/ul/li[3]/label/i")
+    TOP_RIGHT_RADIO = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[5]/div[2]/div/div[1]/div/div/ul/li[4]/label/i")
+    VIDEO_WATERMARK_DONE = (By.XPATH,"/html/body/div[1]/div[2]/div[8]/div[1]/div/ul/li[6]/div[1]/div[5]/div[1]")
+
+
 
 
 
@@ -268,47 +284,79 @@ class PhotonWizard(BasePage):
         iframe = self.driver.find_element(By.ID, "simulator_content")
         self.driver.switch_to.frame(iframe)
         time.sleep(3)
+    def allow_downloading(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
+        time.sleep(2)
+        pyautogui.click(486, 851)
+        time.sleep(2)
+        self.do_click(self.ALLOW_DOWNLOADING_TOGGLE_BUTTON)
+        time.sleep(2)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
+    def brand_player_with_logo(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
+        time.sleep(2)
+        pyautogui.click(486, 851)
+        time.sleep(2)
+        self.do_click(self.BRAND_PLAYER_TOGGLE_BUTTON)
+        time.sleep(2)
+        self.do_click(self.REPLACE_LOGO_BUTTON)
+        time.sleep(2)
+        self.do_click(self.CHOOSE_TO_UPLOAD_FILE)
+        time.sleep(3)
+        pyautogui.typewrite(self.FILE_PATH, interval=0.15)
+        pyautogui.press('enter')
+        time.sleep(8)
+        self.do_click(self.BRAND_PLAYER_DONE)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(3)
+    def video_watermark_bottom_right(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
+        time.sleep(2)
+        pyautogui.click(486, 851)
+        time.sleep(2)
+        self.do_click(self.VIDEO_WATERMARK_TOGGLE_BUTTON)
+        time.sleep(2)
+        self.do_click(self.BOTTOM_RIGHT_RADIO)
+        time.sleep(2)
+        self.do_click(self.VIDEO_WATERMARK_DONE)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(4)
+    def video_watermark_bottom_left(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
+        time.sleep(2)
+        pyautogui.click(486, 851)
+        time.sleep(2)
+        self.do_click(self.VIDEO_WATERMARK_TOGGLE_BUTTON)
+        time.sleep(2)
+        self.do_click(self.BOTTOM_LEFT_RADIO)
+        time.sleep(2)
+        self.do_click(self.VIDEO_WATERMARK_DONE)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(4)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def video_watermark_top_right(self):
+        self.do_click(self.GALLERY_PAGE_MAIN_LINK)
+        self.do_click(self.CUSTOMIZE_GALLERY_GEAR_ICON)
+        time.sleep(2)
+        pyautogui.click(486, 851)
+        time.sleep(2)
+        self.do_click(self.VIDEO_WATERMARK_TOGGLE_BUTTON)
+        time.sleep(2)
+        self.do_click(self.TOP_RIGHT_RADIO)
+        time.sleep(2)
+        self.do_click(self.VIDEO_WATERMARK_DONE)
+        iframe = self.driver.find_element(By.ID, "simulator_content")
+        self.driver.switch_to.frame(iframe)
+        time.sleep(4)
 
 
 

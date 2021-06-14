@@ -142,5 +142,65 @@ class Test_Photon_Wizard(BaseTest):
                 print("*******The video is playing after input the right password*******")
         except:
                 print("---------The video is not opened when correct password is inputed-------------")
+    def test_allow_downloading(self):
+        self.photon_wizard = PhotonWizard(self.driver)
+        self.photon_wizard.allow_downloading()
+        try:
+            download_button = self.driver.find_element(By.CSS_SELECTOR,".mejs-button.mejs-download-button")
+            if download_button:
+                print('***********The Video downloading is enabled**********')
+        except:
+            print('-------Failed adding downloading button------------')
+    def test_brand_player_with_logo(self):
+        self.photon_wizard = PhotonWizard(self.driver)
+        self.photon_wizard.brand_player_with_logo()
+        time.sleep(2)
+        self.photon_wizard.do_click(self.photon_wizard.PLAYER_CENTER)
+        try:
+            player_logo = self.driver.find_element(By.CSS_SELECTOR,".mejs-player-button.mejs-player-logo-button")
+            if player_logo:
+                print("*******The logo was successfully added to the player**********")
+        except:
+            print("----------The new logo was not added to the player--------------")
+    def test_video_watermark_bottom_right(self):
+        self.photon_wizard= PhotonWizard(self.driver)
+        self.photon_wizard.video_watermark_bottom_right()
+        try:
+            bottom_right_watermark = self.driver.find_element(By.CSS_SELECTOR,".mejs-button.mejs-logo-button.bottom_right  ")
+            if bottom_right_watermark:
+                print("*******The bottom right watermark was added***********")
+        except:
+            print("--------The bottom right watermark failed--------------")
+    def test_video_watermark_bottom_left(self):
+        self.photon_wizard= PhotonWizard(self.driver)
+        self.photon_wizard.video_watermark_bottom_left()
+        time.sleep(2)
+        self.photon_wizard.do_click(self.photon_wizard.PLAYER_CENTER)
+        time.sleep(5)
+        try:
+            bottom_left_watermark = self.driver.find_element(By.CSS_SELECTOR,".mejs-button.mejs-logo-button.bottom_left  ")
+            if bottom_left_watermark:
+                print("*******The bottom left watermark was added***********")
+        except:
+            print("--------The bottom left watermark failed--------------")
+    def test_video_watermark_top_right(self):
+        self.photon_wizard= PhotonWizard(self.driver)
+        self.photon_wizard.video_watermark_top_right()
+        time.sleep(2)
+        self.photon_wizard.do_click(self.photon_wizard.PLAYER_CENTER)
+        time.sleep(5)
+        try:
+            top_right_watermark = self.driver.find_element(By.CSS_SELECTOR,".mejs-button.mejs-logo-button.top_right  ")
+            if top_right_watermark:
+                print("*******The top right watermark was added***********")
+        except:
+            print("--------The top right watermark failed--------------")
+
+
+
+
+
+
+
 
 
