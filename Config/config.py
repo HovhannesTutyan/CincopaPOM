@@ -2,8 +2,8 @@ from selenium.webdriver.common.by import By
 class TestData:
     CHROME_EXECUTABLE_PATH="C:/Users/User/Desktop/chromedriver.exe"
     BASE_URL="https://www.cincopa.com"
-    USER_NAME="zhvliwouhwqhrvldzc@twzhhq.online"
-    PASSWORD="5544332211"
+    USER_NAME="egl73843@zwoho.com"
+    PASSWORD="654127"
     LOGIN_PAGE_TITLE="Login To Your Account | Cincopa"
     GALLERY_PREVIEW_TITLE="New Gallery"
     GALLERY_PREVIEW_LOCATOR=(By.XPATH,"//*[@id=\"gallery_15520101\"]/td[1]/div[1]/div")
