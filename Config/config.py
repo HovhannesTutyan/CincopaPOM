@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 class TestData:
     CHROME_EXECUTABLE_PATH="C:/Users/User/Desktop/chromedriver.exe"
     BASE_URL="https://www.cincopa.com"
-    USER_NAME="egl73843@zwoho.com"
+    USER_NAME="dqg20915@eoopy.com"
     PASSWORD="654127"
     LOGIN_PAGE_TITLE="Login To Your Account | Cincopa"
     GALLERY_PREVIEW_TITLE="New Gallery"
